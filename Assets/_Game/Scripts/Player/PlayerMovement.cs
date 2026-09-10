@@ -8,12 +8,14 @@ public class PlayerMovement : MonoBehaviour
     public float speed= 5.0f;
     public float turnSpeed= 5.0f;
 
-    private SpriteRenderer characterTurn;
+    CharacterController characterController;
 
+    private SpriteRenderer characterTurn;
 
     void Start()
     {
         MoveAction.Enable();
+        characterController=GetComponent<CharacterController>();
         characterTurn = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -22,9 +24,10 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput=MoveAction.ReadValue<Vector2>();
 
-        transform.Translate(Vector3.forward*Time.deltaTime*speed*moveInput.y);
+        characterController.Move(Vector3.forward*Time.deltaTime*speed*moveInput.y);
 
-        transform.Translate(Vector3.right*Time.deltaTime*turnSpeed*moveInput.x);
+        characterController.Move(Vector3.right*Time.deltaTime*turnSpeed*moveInput.x);
+
 
         if(moveInput.x >0)
         {
