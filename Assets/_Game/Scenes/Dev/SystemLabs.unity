@@ -131,7 +131,8 @@ GameObject:
   - component: {fileID: 29846931}
   - component: {fileID: 29846930}
   - component: {fileID: 29846929}
-  m_Layer: 0
+  - component: {fileID: 29846933}
+  m_Layer: 3
   m_Name: TestCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,13 +225,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29846928}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.5, y: 0.95, z: -0.45}
+  m_LocalRotation: {x: -0, y: 0.0063730394, z: -0, w: 0.99997973}
+  m_LocalPosition: {x: 5.07, y: 0.95, z: -0.12}
   m_LocalScale: {x: 3.1348848, y: 2.1612432, z: 1.053}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.73, z: 0}
+--- !u!114 &29846933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29846928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0d73a341dd0e441926ae0aa03c8ebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestInteractable
 --- !u!1 &37560886
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +355,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &194274776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 194274777}
+  m_Layer: 0
+  m_Name: InteractOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &194274777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194274776}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1021680097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &639406767
 GameObject:
@@ -709,6 +753,7 @@ GameObject:
   - component: {fileID: 1021680097}
   - component: {fileID: 1021680096}
   - component: {fileID: 1021680098}
+  - component: {fileID: 1021680099}
   m_Layer: 0
   m_Name: PF_Player
   m_TagString: Untagged
@@ -728,6 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7210b917cede894aa33dd09d560f907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  InteractOrigin: {fileID: 194274777}
   MoveAction:
     m_Name: Move
     m_Type: 0
@@ -795,6 +841,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 880867998}
+  - {fileID: 194274777}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &1021680098
@@ -822,6 +869,38 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: -0.04, y: -0.01, z: 0.07}
+--- !u!114 &1021680099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021680095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e684dd905c1ed9a40ba81bf69e66e62e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
+  interactAction:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4dd07ef2-2135-4e13-bfeb-212753be451c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 94434554-030d-44f8-9a59-a45845466c02
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact
+      m_Flags: 0
+    m_Flags: 0
+    m_Priority: 0
+  interactionRadius: 3
+  interactOrigin: {fileID: 194274777}
 --- !u!1 &1408472216
 GameObject:
   m_ObjectHideFlags: 0
