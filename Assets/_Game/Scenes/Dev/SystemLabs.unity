@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 29846930}
   - component: {fileID: 29846929}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: TestCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 37560888}
   - component: {fileID: 37560887}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: TestCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 639406769}
   - component: {fileID: 639406768}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: TestGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -957,5 +957,5 @@ SceneRoots:
   - {fileID: 1408472218}
   - {fileID: 1021680097}
   - {fileID: 639406771}
-  - {fileID: 29846932}
   - {fileID: 37560890}
+  - {fileID: 29846932}

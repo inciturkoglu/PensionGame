@@ -1,12 +1,15 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Transform InteractOrigin;
     public InputAction MoveAction;
     public Vector2 moveInput;
     public float speed= 5.0f;
     public float turnSpeed= 5.0f;
+    Vector3 newXOrigin;
 
     CharacterController characterController;
 
@@ -33,13 +36,16 @@ public class PlayerMovement : MonoBehaviour
         {
             
             characterTurn.flipX = true;
-
+            newXOrigin.x =1.2f;
+            InteractOrigin.localPosition= newXOrigin;
         }
 
         if(moveInput.x <0)
         {
             
             characterTurn.flipX = false;
+            newXOrigin.x =-1.2f;
+            InteractOrigin.localPosition= newXOrigin;
         }
 
        
