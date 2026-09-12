@@ -4,10 +4,16 @@ using UnityEngine;
 public class TestInteractable : MonoBehaviour, IInteractable
 {
 
+public Transform AnchorPoint;
     
     public bool CanInteract()
     {
         return true;
+    }
+
+    public Transform GetInteractionPoint()
+    {
+        return AnchorPoint;
     }
 
     public void Interact()

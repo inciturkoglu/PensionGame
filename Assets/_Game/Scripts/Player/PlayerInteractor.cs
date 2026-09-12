@@ -11,44 +11,44 @@ public class PlayerInteractor : MonoBehaviour
     private float interactionRadius= 3f;
     [SerializeField]
      private Transform interactOrigin;
-
      IInteractable currentInteractable;
-
-    
+     public GameObject interactionPrompt;
 
      void Start()
     {
        interactAction.Enable();
+       interactionPrompt.gameObject.SetActive(false);
     }
 
-   
     void Update()
     {
         
-
+         interactionPrompt.gameObject.SetActive(false);
          float closestdistance= float.MaxValue;
          currentInteractable=null;
 
     Collider[] nearbyColliders = Physics.OverlapSphere(interactOrigin.position, interactionRadius);
     
-
         foreach(Collider collider in nearbyColliders)
         {
           IInteractable interactable = collider.gameObject.GetComponent<IInteractable>();
             
             if(interactable!=null)
-            { 
-                Debug.Log("Interactable Bulundu");
+            {
              if(interactable.CanInteract())
              {
                 float currentDistance = Vector3.Distance(interactOrigin.position,collider.transform.position);
                      
                     if(currentDistance<closestdistance)
-                       {
+                     {
                         closestdistance=currentDistance;
                         currentInteractable =interactable;   
-
-                      }
+                        if(currentInteractable!=null)
+                        {
+                           interactionPrompt.transform.position=currentInteractable.GetInteractionPoint().position;
+                     interactionPrompt.SetActive(true);
+                        }
+                     }
              }
             
             }
