@@ -14,15 +14,16 @@ public class DialogueController : MonoBehaviour
     private TMP_Text DialogueText;
     [SerializeField]
     private GameObject DialogueUI;
-    NPCDefinition currentSpeaker;
+    private NPCInteraction currentSpeaker;
     List<string> currentLines;
     int currentLine;
-    public void StartDialogue(NPCDefinition npcDefinition)
+    public void StartDialogue(NPCInteraction npcInteraction)
     {
-        currentSpeaker=npcDefinition;
-        currentLines=npcDefinition.GetDialogueLines();
+        currentSpeaker=npcInteraction;
+        currentLines=npcInteraction.npcDefinition.GetDialogueLines();
         currentLine=0;
 
+        PositionDialogueBubble();
         DialogueUI.SetActive(true);
 
         DisplayCurrentLine();
@@ -47,6 +48,12 @@ public class DialogueController : MonoBehaviour
         }
         
         else {return false;}
+    }
+
+    public void PositionDialogueBubble()
+    {
+        
+        DialogueUI.transform.position=currentSpeaker.BubbleAnchor.position;
     }
 
     public void EndDialogue()

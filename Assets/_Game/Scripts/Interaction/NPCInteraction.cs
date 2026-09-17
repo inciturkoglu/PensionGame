@@ -3,6 +3,7 @@ using UnityEngine;
 public class NPCInteraction : MonoBehaviour, IInteractable
 {
     public Transform AnchorPoint;
+    public Transform BubbleAnchor;
     public NPCDefinition npcDefinition;
 
     public DialogueController DialogueSystem;
@@ -18,7 +19,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        DialogueSystem.StartDialogue(npcDefinition);
+        DialogueSystem.StartDialogue(this);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
