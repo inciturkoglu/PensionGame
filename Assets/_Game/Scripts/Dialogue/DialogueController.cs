@@ -1,9 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.OSX;
 using UnityEngine.UI;
 
 public class DialogueController : MonoBehaviour
@@ -17,11 +19,27 @@ public class DialogueController : MonoBehaviour
     private NPCInteraction currentSpeaker;
     List<string> currentLines;
     int currentLine;
+
+    Coroutine typingCoroutine;
+    
+    private IEnumerator TypeLine(string line)
+    {
+        DialogueText.text=line;
+        DialogueText.maxVisibleCharacters= 0;
+        for(int i=0;i<line.Length; i++)
+        {
+            DialogueText.maxVisibleCharacters=i+1;
+            yield return new WaitForSeconds(0.05f);
+        }
+        typingCoroutine=null;
+    }
     public void StartDialogue(NPCInteraction npcInteraction)
     {
         currentSpeaker=npcInteraction;
         currentLines=npcInteraction.npcDefinition.GetDialogueLines();
         currentLine=0;
+
+        AdvanceDialogue.Enable();
 
         PositionDialogueBubble();
         DialogueUI.SetActive(true);
@@ -36,11 +54,22 @@ public class DialogueController : MonoBehaviour
     
     public void DisplayCurrentLine()
     {
-        DialogueText.text=GetCurrentLine();
+        typingCoroutine=StartCoroutine(TypeLine(GetCurrentLine()));
+
+    }
+
+    public void CompleteCurrentLine()
+    {
+        if(typingCoroutine!=null)
+        {
+            DialogueText.maxVisibleCharacters=GetCurrentLine().Length;
+            StopCoroutine(typingCoroutine);
+        }
+            
     }
     public bool NextLine()
     {
-        
+    
         if(currentLine<currentLines.Count-1)
         {
             currentLine++;
@@ -63,22 +92,31 @@ public class DialogueController : MonoBehaviour
 
     public void Start()
     {
-        AdvanceDialogue.Enable();
+        
     }
     public void Update()
     {
         if(AdvanceDialogue.WasPressedThisFrame())
         {
-            if(NextLine())
+            if(typingCoroutine!=null)
         {
-            DisplayCurrentLine();
+            CompleteCurrentLine();
+            typingCoroutine=null;
         }
         else
         {
-            EndDialogue();
+            if(NextLine())
+            {
+              DisplayCurrentLine();
+            }
+            else
+            {
+              EndDialogue();
+            }
         }
         }
 
-        
     }
+
 }
+
